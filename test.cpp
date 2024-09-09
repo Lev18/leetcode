@@ -48,3 +48,6 @@ void back_track(std::vector<char>& perm, std::vector<char>& nums,
         file << '\n';
       }
     }
+
+    // 1945 
+  

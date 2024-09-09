@@ -82,37 +82,39 @@
 
 # # Print the result
 # print(hidden_message)
-# from PIL import Image
-# import base64
 
-# # Open the image file
 
-# image_path = '/home/levon/Downloads/the-image-cicada.png'
-# image = Image.open(image_path)
-# #Convert the stego image to RGB format:
-# stego_img = image.convert('RGB')
+from PIL import Image
+import base64
 
-# #Get the size of the stego image:
-# width, height = stego_img.size
+# Open the image file
 
-# #Iterate over each pixel in the stego image and extract the least significant bit of each color channel (red, green, and blue) to decode the binary message:
-# binary_message = ''
-# i = 0
-# while True:
-#     x, y = i % width, i // width
-#     r, g, b = stego_img.getpixel((x, y))
-#     binary_message += str(r & 1) + str(g & 1) + str(b & 1)
-#     i += 1
-#     if len(binary_message) % 8 == 0 and chr(int(binary_message[-8:], 2)) == '\x00':
-#         break
+image_path = '/home/levon/Downloads/the-image-cicada.png'
+image = Image.open(image_path)
+#Convert the stego image to RGB format:
+stego_img = image.convert('RGB')
 
-# #Convert the binary message to its original text format:
-# message = ''
-# for i in range(0, len(binary_message), 8):
-#     message += chr(int(binary_message[i:i+8], 2))
+#Get the size of the stego image:
+width, height = stego_img.size
 
-# #Print the decoded message:
-# print(message)
+#Iterate over each pixel in the stego image and extract the least significant bit of each color channel (red, green, and blue) to decode the binary message:
+binary_message = ''
+i = 0
+while True:
+    x, y = i % width, i // width
+    r, g, b = stego_img.getpixel((x, y))
+    binary_message += str(r & 1) + str(g & 1) + str(b & 1)
+    i += 1
+    if len(binary_message) % 8 == 0 and chr(int(binary_message[-8:], 2)) == '\x00':
+        break
+
+#Convert the binary message to its original text format:
+message = ''
+for i in range(0, len(binary_message), 8):
+    message += chr(int(binary_message[i:i+8], 2))
+
+#Print the decoded message:
+print(message)
 
 
 # import markovify
@@ -128,27 +130,27 @@
 # generated_text = text_model.make_sentence()
 
 # print(generated_text)
-import nltk
-from nltk.corpus import wordnet
+# import nltk
+# from nltk.corpus import wordnet
 
-# Download WordNet if not already downloaded
-nltk.download('wordnet')
+# # Download WordNet if not already downloaded
+# nltk.download('wordnet')
 
-def is_meaningful_word(word):
-    """
-    Check if a word exists in WordNet corpus, indicating it's meaningful.
-    """
-    return bool(wordnet.synsets(word))
+# def is_meaningful_word(word):
+#     """
+#     Check if a word exists in WordNet corpus, indicating it's meaningful.
+#     """
+#     return bool(wordnet.synsets(word))
 
-# Open the file containing words
-file_path = "write.txt"  # Change to the path of your file
-meaningful_words = []
+# # Open the file containing words
+# file_path = "write.txt"  # Change to the path of your file
+# meaningful_words = []
 
-with open(file_path, "r") as file:
-    for line in file:
-        word = line.strip()  # Remove leading/trailing whitespaces and newline characters
-        if is_meaningful_word(word):
-            meaningful_words.append(word)
+# with open(file_path, "r") as file:
+#     for line in file:
+#         word = line.strip()  # Remove leading/trailing whitespaces and newline characters
+#         if is_meaningful_word(word):
+#             meaningful_words.append(word)
 
-print("Meaningful words:", meaningful_words)
+# print("Meaningful words:", meaningful_words)
 
